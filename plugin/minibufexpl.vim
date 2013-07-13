@@ -401,8 +401,8 @@ augroup MiniBufExpl
 if exists('##QuitPre')
   autocmd QuitPre        *
     \ if <SID>NextNormalWindow() == -1 | call <SID>StopExplorer(0) | endif
-else
-  autocmd BufEnter       * nested call <SID>QuitIfLastOpen()
+"else
+  "autocmd BufEnter       * nested call <SID>QuitIfLastOpen()
 endif
   autocmd FileType minibufexpl    call <SID>RenderSyntax()
 augroup END
@@ -2106,7 +2106,7 @@ endfunction
 " QuitIfLastOpen {{{
 "
 function! <SID>QuitIfLastOpen() abort
-  " Quit MBE if no more mormal window left
+  " Quit MBE if no more normal window left
   if (bufname('%') == '-MiniBufExplorer-') && (<SID>NextNormalWindow() == -1)
     call <SID>DEBUG('MBE is the last open window, quit it', 9)
     if tabpagenr('$') == 1
