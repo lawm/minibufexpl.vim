@@ -1097,7 +1097,7 @@ function! <SID>DisplayBuffers(curBufNum)
     if !g:miniBufExplShowBufNumbers
       call search('\V['.s:bufUniqNameDict[a:curBufNum].']', 'w')
     else
-      call search('\V['.a:curBufNum.':'.s:bufUniqNameDict[a:curBufNum].']', 'w')
+      call search('\V['.a:curBufNum.' '.s:bufUniqNameDict[a:curBufNum].']', 'w')
     endif
   endif
 
@@ -1516,7 +1516,7 @@ function! <SID>BuildBufferList(curBufNum)
         " dir if neccessary
         let l:tab = '['
         if g:miniBufExplShowBufNumbers == 1
-            let l:tab .= l:i.':'
+            let l:tab .= l:i.' '
         endif
         let l:tab .= s:bufUniqNameDict[l:i]
         let l:tab .= ']'
@@ -2165,9 +2165,9 @@ function! <SID>GetSelectedBuffer()
       " better way to get the key for a dictionary by its value.
       let l:bufUniqNameDictKeys = keys(s:bufUniqNameDict)
       let l:bufUniqNameDictValues = values(s:bufUniqNameDict)
-      let l:retv = l:bufUniqNameDictKeys[match(l:bufUniqNameDictValues,substitute(@",'[0-9]*:\(.*\)', '\1', ''))]
+      let l:retv = l:bufUniqNameDictKeys[match(l:bufUniqNameDictValues,substitute(@",'[0-9]* \(.*\)', '\1', ''))]
     else
-      let l:retv = substitute(@",'\([0-9]*\):.*', '\1', '') + 0
+      let l:retv = substitute(@",'\([0-9]*\) .*', '\1', '') + 0
     endif
     let @" = l:save_reg
     call <SID>DEBUG('Leaving GetSelectedBuffer()',10)
