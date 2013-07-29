@@ -685,10 +685,10 @@ function! <SID>StartExplorer(curBufNum)
     nnoremap <buffer> <right> :call search('\[[^\]]*\]')<CR>:<BS>
     nnoremap <buffer> <left>  :call search('\[[^\]]*\]','b')<CR>:<BS>
   else
-    nnoremap <buffer> l       :call search('\[[0-9]*:[^\]]*\]')<CR>:<BS>
-    nnoremap <buffer> h       :call search('\[[0-9]*:[^\]]*\]','b')<CR>:<BS>
-    nnoremap <buffer> <right> :call search('\[[0-9]*:[^\]]*\]')<CR>:<BS>
-    nnoremap <buffer> <left>  :call search('\[[0-9]*:[^\]]*\]','b')<CR>:<BS>
+    nnoremap <buffer> l       :call search('\[[0-9]* [^\]]*\]')<CR>:<BS>
+    nnoremap <buffer> h       :call search('\[[0-9]* [^\]]*\]','b')<CR>:<BS>
+    nnoremap <buffer> <right> :call search('\[[0-9]* [^\]]*\]')<CR>:<BS>
+    nnoremap <buffer> <left>  :call search('\[[0-9]* [^\]]*\]','b')<CR>:<BS>
   endif
 
   " Attempt to perform single click mapping
@@ -1980,8 +1980,8 @@ endfunction
 " NameCmp - compares tabs based on filename {{{
 "
 function! <SID>NameCmp(tab1, tab2)
-  let l:name1 = matchstr(a:tab1, ":.*")
-  let l:name2 = matchstr(a:tab2, ":.*")
+  let l:name1 = matchstr(a:tab1, " .*")
+  let l:name2 = matchstr(a:tab2, " .*")
   if l:name1 < l:name2
     return -1
   elseif l:name1 > l:name2
@@ -2129,7 +2129,7 @@ endfunction
 "
 function! <SID>GetActiveBuffer()
   call <SID>DEBUG('Entering GetActiveBuffer()',10)
-  let l:bufNum = substitute(s:miniBufExplBufList,'\[\([0-9]*\):[^\]]*\][^\!]*!', '\1', '') + 0
+  let l:bufNum = substitute(s:miniBufExplBufList,'\[\([0-9]*\) [^\]]*\][^\!]*!', '\1', '') + 0
   call <SID>DEBUG('Currently active buffer is '.l:bufNum,10)
   call <SID>DEBUG('Leaving GetActiveBuffer()',10)
   return l:bufNum
