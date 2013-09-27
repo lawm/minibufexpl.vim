@@ -2408,7 +2408,7 @@ function! <SID>DEBUG(msg, level)
                 let l:result = system("cmd /c 'echo ".s:debugIndex.':'.a:level.':'.a:msg." >> MiniBufExplorer.DBG'")
             endif
             if has('unix')
-                let l:result = system("echo '".s:debugIndex.':'.a:level.':'.a:msg." >> MiniBufExplorer.DBG'")
+                let l:result = system("echo '".s:debugIndex.':'.a:level.':'.a:msg."' >> MiniBufExplorer.DBG")
             endif
         else
             call confirm('Error in file writing version of the debugging code, vim not compiled with system or fork. Dissabling MiniBufExplorer debugging.', 'OK')
