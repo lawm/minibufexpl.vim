@@ -833,6 +833,7 @@ function! <SID>ToggleExplorer(tabs,force)
       call <SID>StopExplorer(a:force)
     else
       let t:skipEligibleBuffersCheck = 1
+      call <SID>VimEnterHandler()
       call <SID>StartExplorer(bufnr("%"))
     endif
   endif
